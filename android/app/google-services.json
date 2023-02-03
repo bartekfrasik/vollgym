@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "839283718635",
+    "project_id": "vollgym",
+    "storage_bucket": "vollgym.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:839283718635:android:b72dbde8200db41c7cc1ae",
+        "android_client_info": {
+          "package_name": "com.bartekfrasik.vollgym"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "839283718635-1le1k3erni0k518d76a36sglh4lsv9fb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsiDCp8wBNHdVoDgSHbEAARt-3_pl40Ro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "839283718635-1le1k3erni0k518d76a36sglh4lsv9fb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "839283718635-8hha76ngsjvq75ujhoso4umpaqa9vvbf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bartekfrasik.vollgym"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
