@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:vollgym/app/disciplines/disciplines_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -20,12 +21,10 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Builder(builder: (context) {
         if (currentIndex == 0) {
-          return Center(
-            child: Text('Jeden'),
-          );
+          return const DisciplinesPage();
         }
         if (currentIndex == 1) {
-          return Center(
+          return const Center(
             child: Text('Dwa'),
           );
         }
