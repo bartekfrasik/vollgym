@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:vollgym/app/chat/chat_page.dart';
 import 'package:vollgym/app/disciplines/disciplines_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,9 +25,7 @@ class _HomePageState extends State<HomePage> {
           return const DisciplinesPage();
         }
         if (currentIndex == 1) {
-          return const Center(
-            child: Text('Dwa'),
-          );
+          return const ChatPage();
         }
         return Center(
           child: Column(
@@ -57,8 +56,8 @@ class _HomePageState extends State<HomePage> {
             label: 'Dyscyplina',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.fitness_center),
-            label: 'Ćwiczenia',
+            icon: Icon(Icons.messenger),
+            label: 'Czat',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
