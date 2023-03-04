@@ -4,8 +4,13 @@ import 'package:vollgym/app/exercises/exercise_tile.dart';
 import 'package:vollgym/app/models/exercise.dart';
 
 class ExercisesPage extends StatefulWidget {
-  const ExercisesPage({super.key, required this.disciplineName});
+  const ExercisesPage({
+    super.key,
+    required this.disciplineId,
+    required this.disciplineName,
+  });
 
+  final String disciplineId;
   final String disciplineName;
 
   @override
@@ -44,7 +49,8 @@ class _ExercisesPageState extends State<ExercisesPage> {
                     child: SingleChildScrollView(
                       physics: const AlwaysScrollableScrollPhysics(),
                       child: ConstrainedBox(
-                        constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                        constraints:
+                            BoxConstraints(minHeight: constraints.maxHeight),
                         child: const Center(
                           child: Text('Data not found'),
                         ),
@@ -78,12 +84,25 @@ class _ExercisesPageState extends State<ExercisesPage> {
   }
 
   Stream<List<Exercise>> fetchAllExercises() {
-    return FirebaseFirestore.instance.collection('exercises').snapshots().map((QuerySnapshot snapshot) {
-      return snapshot.docs.map((doc) {
-        final map = doc.data() as Map<String, dynamic>;
-        map['id'] = doc.id;
-        return Exercise.fromMap(map);
-      }).toList();
+    return FirebaseFirestore.instance
+        .collection('exercises')
+        .snapshots()
+        .map((QuerySnapshot snapshot) {
+      return snapshot.docs
+          .map((doc) {
+            final map = doc.data() as Map<String, dynamic>;
+            map['id'] = doc.id;
+
+            if (widget.disciplineId != map['disciplineId']) {
+              return null;
+            }
+
+            return Exercise.fromMap(map);
+          })
+          .toList()
+          .where((e) => e != null)
+          .cast<Exercise>()
+          .toList();
     });
   }
 }
