@@ -8,6 +8,7 @@ import 'package:vollgym/app/models/account.dart';
 import 'package:vollgym/app/models/account_tile_data.dart';
 
 import 'package:vollgym/app/my_account/widgets/account_category_items.dart';
+import 'package:vollgym/app/widgets/rounded_button.dart';
 
 final _profile = [
   AccountTileData(
@@ -55,11 +56,17 @@ class MyAccountPage extends StatelessWidget {
               const SizedBox(height: 10),
               AccountCategoryItems(title: 'Pomoc', items: _help),
               const Spacer(),
-              ElevatedButton(
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                },
-                child: const Text('Wyloguj'),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: RoundedButton(
+                  text: 'Wyloguj',
+                  onPressed: () {
+                    FirebaseAuth.instance.signOut();
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: 20,
               ),
             ],
           );
