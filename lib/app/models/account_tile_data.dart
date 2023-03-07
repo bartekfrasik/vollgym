@@ -9,5 +9,5 @@ class AccountTileData {
 
   final IconData icon;
   final String title;
-  final VoidCallback onPressed;
+  final void Function(BuildContext context) onPressed;
 }

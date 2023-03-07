@@ -1,20 +1,22 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vollgym/app/models/account.dart';
 import 'package:vollgym/app/models/account_tile_data.dart';
+import 'package:vollgym/app/my_account/my_account_details/my_account_details_page.dart';
 
 import 'package:vollgym/app/my_account/widgets/account_category_items.dart';
+import 'package:vollgym/app/utils/device_info.dart';
 import 'package:vollgym/app/widgets/rounded_button.dart';
 
 final _profile = [
   AccountTileData(
     icon: Icons.model_training,
     title: 'Sprzęt',
-    onPressed: () {},
+    onPressed: (BuildContext context) {},
   )
 ];
 
@@ -22,12 +24,60 @@ final _help = [
   AccountTileData(
     icon: Icons.info,
     title: 'Informacja o systemie',
-    onPressed: () {},
+    onPressed: (BuildContext context) async {
+      DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
+
+      var mappedDeviceInfo = {};
+      var systemVersion = '';
+      var device = '';
+
+      if (Platform.isIOS) {
+        mappedDeviceInfo =
+            DeviceInfo.readIosDeviceInfo(await deviceInfoPlugin.iosInfo);
+        systemVersion = mappedDeviceInfo['systemVersion'];
+        device = mappedDeviceInfo['model'];
+      } else if (Platform.isAndroid) {
+        mappedDeviceInfo =
+            DeviceInfo.readAndroidBuildData(await deviceInfoPlugin.androidInfo);
+        systemVersion = 'Android ${mappedDeviceInfo['version.release']}';
+        device = mappedDeviceInfo['device'];
+      }
+
+      if (mappedDeviceInfo.isNotEmpty) {
+        AlertDialog alert = AlertDialog(
+          title: const Text("Informacje o systemie"),
+          content: SizedBox(
+            height: 60,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Moje imię: Bartek Frasik'),
+                Text('Wersja systemu: $systemVersion'),
+                Text('Urządzenie: $device'),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: const Text("OK"),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ],
+        );
+
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return alert;
+          },
+        );
+      }
+    },
   ),
   AccountTileData(
     icon: Icons.privacy_tip,
     title: 'Privacy Policy',
-    onPressed: () {},
+    onPressed: (BuildContext context) {},
   ),
 ];
 
@@ -65,9 +115,7 @@ class MyAccountPage extends StatelessWidget {
                   },
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
             ],
           );
         },
@@ -116,7 +164,14 @@ class MyAccountSection extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 15),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              MyAccountDetailsPage(account: account)),
+                    );
+                  },
                   child: Row(
                     children: const [
                       Text('Przejdź do szczegółów'),

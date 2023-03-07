@@ -71,7 +71,7 @@ class AccountCategoryItems extends StatelessWidget {
         Icon(items[i].icon),
         const SizedBox(width: 5),
         TextButton(
-          onPressed: () => items[i].onPressed(),
+          onPressed: () => items[i].onPressed(context),
           child: Text(items[i].title),
         ),
       ],
