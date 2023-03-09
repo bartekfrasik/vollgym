@@ -8,6 +8,7 @@ import 'package:vollgym/app/models/account.dart';
 import 'package:vollgym/app/models/account_tile_data.dart';
 import 'package:vollgym/app/my_account/my_account_details/my_account_details_page.dart';
 import 'package:vollgym/app/my_account/my_account_equipment.dart';
+import 'package:vollgym/app/my_account/my_account_privacy_policy.dart';
 
 import 'package:vollgym/app/my_account/widgets/account_category_items.dart';
 import 'package:vollgym/app/utils/device_info.dart';
@@ -83,7 +84,12 @@ final _help = [
   AccountTileData(
     icon: Icons.privacy_tip,
     title: 'Privacy Policy',
-    onPressed: (BuildContext context) {},
+    onPressed: (BuildContext context) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const MyAccountPrivacyPolicy()),
+      );
+    },
   ),
 ];
 
