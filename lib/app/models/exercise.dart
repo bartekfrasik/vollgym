@@ -21,7 +21,8 @@ class Exercise {
       disciplineId: map['disciplineId'],
       title: map['title'],
       date: DateTime.parse(map['date']),
-      exercisePerformed: ExercisePerformed.fromMapList(map['exercisesPerformed']),
+      exercisePerformed:
+          ExercisePerformed.fromMapList(map['exercisesPerformed']),
     );
   }
 }

@@ -29,6 +29,7 @@ class _ExercisesPageState extends State<ExercisesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(title: Text(widget.disciplineName)),
       body: Padding(
         padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
@@ -92,6 +93,12 @@ class _ExercisesPageState extends State<ExercisesPage> {
           .map((doc) {
             final map = doc.data() as Map<String, dynamic>;
             map['id'] = doc.id;
+            try {
+              Exercise.fromMap(map);
+            } catch (e) {
+              print(e);
+              print(map);
+            }
 
             if (widget.disciplineId != map['disciplineId']) {
               return null;

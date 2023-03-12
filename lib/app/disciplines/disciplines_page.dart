@@ -22,6 +22,7 @@ class _DisciplinesPageState extends State<DisciplinesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(title: const Text('Osiągnij swój sukces')),
       body: Padding(
         padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
@@ -42,7 +43,8 @@ class _DisciplinesPageState extends State<DisciplinesPage> {
                     child: SingleChildScrollView(
                       physics: const AlwaysScrollableScrollPhysics(),
                       child: ConstrainedBox(
-                        constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                        constraints:
+                            BoxConstraints(minHeight: constraints.maxHeight),
                         child: const Center(
                           child: Text('Data not found'),
                         ),
@@ -79,7 +81,10 @@ class _DisciplinesPageState extends State<DisciplinesPage> {
   }
 
   Stream<List<Discipline>> fetchAllDisciplines() {
-    return FirebaseFirestore.instance.collection('disciplines').snapshots().map((QuerySnapshot snapshot) {
+    return FirebaseFirestore.instance
+        .collection('disciplines')
+        .snapshots()
+        .map((QuerySnapshot snapshot) {
       return snapshot.docs.map((doc) {
         final map = doc.data() as Map<String, dynamic>;
         map['id'] = doc.id;

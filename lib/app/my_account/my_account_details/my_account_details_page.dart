@@ -22,10 +22,14 @@ class _MyAccountDetailsPageState extends State<MyAccountDetailsPage> {
   final ImagePicker _picker = ImagePicker();
   bool isEdited = false;
 
-  late final _firstNameController = TextEditingController(text: widget.account?.firstName);
-  late final _lastNameController = TextEditingController(text: widget.account?.lastName);
-  late final _emailController = TextEditingController(text: widget.account?.email);
-  late final _phoneNumberController = TextEditingController(text: widget.account?.phoneNumber);
+  late final _firstNameController =
+      TextEditingController(text: widget.account?.firstName);
+  late final _lastNameController =
+      TextEditingController(text: widget.account?.lastName);
+  late final _emailController =
+      TextEditingController(text: widget.account?.email);
+  late final _phoneNumberController =
+      TextEditingController(text: widget.account?.phoneNumber);
 
   String? updatedAvatar;
 
@@ -81,14 +85,16 @@ class _MyAccountDetailsPageState extends State<MyAccountDetailsPage> {
                     }
 
                     if (!status.isGranted) {
-                      final requestedPermission = await Permission.storage.request();
+                      final requestedPermission =
+                          await Permission.storage.request();
 
                       if (!requestedPermission.isGranted) {
                         return;
                       }
                     }
 
-                    final image = await _picker.pickImage(source: ImageSource.gallery);
+                    final image =
+                        await _picker.pickImage(source: ImageSource.gallery);
 
                     if (image != null) {
                       final imageBytes = await image.readAsBytes();
@@ -206,16 +212,19 @@ class FullNameInfo extends StatelessWidget {
         children: [
           const Icon(Icons.account_circle_rounded, size: 35),
           const SizedBox(width: 10),
-          Expanded(child: MyAccountInfoEditingTile(controller: firstNameController)),
+          Expanded(
+              child: MyAccountInfoEditingTile(controller: firstNameController)),
           const SizedBox(width: 10),
-          Expanded(child: MyAccountInfoEditingTile(controller: lastNameController)),
+          Expanded(
+              child: MyAccountInfoEditingTile(controller: lastNameController)),
         ],
       );
     }
 
     return MyAccountInfoTile(
       icon: Icons.account_circle_rounded,
-      title: '${firstNameController.text ?? ''} ${lastNameController.text ?? ''}',
+      title:
+          '${firstNameController.text ?? ''} ${lastNameController.text ?? ''}',
     );
   }
 }

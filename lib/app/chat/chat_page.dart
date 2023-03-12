@@ -29,6 +29,7 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(title: const Text('Czat')),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

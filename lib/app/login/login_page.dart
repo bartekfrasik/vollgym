@@ -20,24 +20,33 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
+      backgroundColor: Colors.grey[300],
+      body: SafeArea(
+        child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const Icon(
+                Icons.lock,
+                size: 100,
+              ),
               Text(isCreatingAccount == true
                   ? 'Zarejestruj się'
                   : 'Zaloguj się'),
               const SizedBox(height: 20),
-              TextField(
-                controller: widget.emailController,
-                decoration: const InputDecoration(hintText: 'E-mail'),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: TextField(
+                  controller: widget.emailController,
+                  decoration: const InputDecoration(hintText: 'E-mail'),
+                ),
               ),
-              TextField(
-                controller: widget.passwordController,
-                decoration: const InputDecoration(hintText: 'Hasło'),
-                obscureText: true,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: TextField(
+                  controller: widget.passwordController,
+                  decoration: const InputDecoration(hintText: 'Hasło'),
+                  obscureText: true,
+                ),
               ),
               const SizedBox(height: 20),
               Text(errorMessage),

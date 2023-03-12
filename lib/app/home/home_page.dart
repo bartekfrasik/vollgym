@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vollgym/app/chat/chat_page.dart';
 import 'package:vollgym/app/disciplines/disciplines_page.dart';
+import 'package:vollgym/app/my_account/my_account_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -20,6 +21,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       body: Builder(builder: (context) {
         if (currentIndex == 0) {
           return const DisciplinesPage();
@@ -27,21 +29,7 @@ class _HomePageState extends State<HomePage> {
         if (currentIndex == 1) {
           return const ChatPage();
         }
-        return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Jesteś zalogowany jako ${widget.user.email}'),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                },
-                child: const Text('Wyloguj'),
-              ),
-            ],
-          ),
-        );
+        return const MyAccountPage();
       }),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
